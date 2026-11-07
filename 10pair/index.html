@@ -110,9 +110,8 @@ body.bg-home{background:#c7e8fb url("data:image/webp;base64,UklGRk43AABXRUJQVlA4
 .room .it.wall{transform:translate(-50%,-50%)}
 .room .it.floor{transform:translate(-50%,-100%)}
 .room .it.floor::after{content:"";position:absolute;left:10%;right:10%;bottom:-2%;height:12%;border-radius:50%;background:rgba(80,50,20,.22);z-index:-1}
-.room .it.drag{cursor:grabbing;filter:drop-shadow(0 8px 6px rgba(60,40,10,.35))}
-.room .it.floor.drag{transform:translate(-50%,-100%) scale(1.08)}
-.room .it.wall.drag{transform:translate(-50%,-50%) scale(1.08)}
+.room .it.drag{cursor:grabbing;opacity:.92}
+.room .it.drag::after{display:none}
 .empty{text-align:center;font-size:22px}
 
 /* dialog */
