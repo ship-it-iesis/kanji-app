@@ -115,7 +115,15 @@ body.bg-home{background:#c7e8fb url("data:image/webp;base64,UklGRk43AABXRUJQVlA4
 .empty{text-align:center;font-size:22px}
 .bgl{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;pointer-events:none;z-index:0}
 .menu3{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.menu3 .btn{font-size:22px;min-height:56px;padding:4px 14px}
+.cbtn{border:4px solid #6b4f3a;border-radius:22px;color:#fff;font-weight:800;font-size:24px;min-height:64px;padding:6px 20px;cursor:pointer;
+  background:linear-gradient(#fff3 0 45%,#0000 46%),var(--cb,#f2b25c);box-shadow:0 6px 0 var(--cd,#c98a30),0 8px 0 #6b4f3a55;
+  text-shadow:-2px -2px 0 var(--cd,#c98a30),2px -2px 0 var(--cd,#c98a30),-2px 2px 0 var(--cd,#c98a30),2px 2px 0 var(--cd,#c98a30),0 3px 0 var(--cd,#c98a30);letter-spacing:.05em}
+.cbtn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--cd,#c98a30)}
+.cbtn img{display:block;height:64px;width:auto;pointer-events:none}
+.cbtn.has{padding:0;border:0;background:none;box-shadow:none;min-height:0}
+.c-mi{--cb:#f3c64f;--cd:#b88a14}.c-ba{--cb:#6cc3b5;--cd:#348a7c}.c-fr{--cb:#b69be0;--cd:#7a5cb0}.c-th{--cb:#7fc4ea;--cd:#3a85b5}.c-re{--cb:#c9b99a;--cd:#8a7752}
+.menu3{gap:14px;margin-top:4px}
+.houserow{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;align-items:center}
 .htitle{font-size:24px;font-weight:800;color:#b45309;min-height:32px}
 .mrow{display:flex;align-items:center;gap:12px;background:var(--card);border:3px solid var(--line);border-radius:18px;padding:10px 14px;font-size:clamp(20px,3.6vw,28px);font-weight:700;text-align:left}
 .mrow.ok{background:var(--ok-bg);border-color:#a9d9b8}
@@ -179,9 +187,9 @@ body.bg-home{background:#c7e8fb url("data:image/webp;base64,UklGRk43AABXRUJQVlA4
         <button class="imgbtn" id="howBtn" aria-label="ルール"></button>
       </div>
       <div class="menu3">
-        <button class="btn" id="missBtn">🎯 ミッション</button>
-        <button class="btn" id="badgeBtn">🏅 バッジ</button>
-        <button class="btn" id="friendBtn">🐾 おともだち</button>
+        <button class="cbtn c-mi" id="missBtn" data-btn="btn_mission">🎯 ミッション</button>
+        <button class="cbtn c-ba" id="badgeBtn" data-btn="btn_badge">🏅 バッジ</button>
+        <button class="cbtn c-fr" id="friendBtn" data-btn="btn_friend">🐾 おともだち</button>
       </div>
     </div>
   </section>
@@ -264,10 +272,10 @@ body.bg-home{background:#c7e8fb url("data:image/webp;base64,UklGRk43AABXRUJQVlA4
     </div>
     <div class="room" id="room"><div class="fl"></div></div>
     <div class="empty" id="houseNote"></div>
-    <div class="row" style="display:flex;justify-content:center;gap:12px">
+    <div class="row" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:12px">
       <button class="imgbtn" id="houseShop" aria-label="おみせ" style="width:190px"></button>
-      <button class="btn" id="houseTheme">🎨 もようがえ</button>
-      <button class="btn" id="housePosReset">もとの ばしょ</button>
+      <button class="cbtn c-th" id="houseTheme" data-btn="btn_theme">🎨 もようがえ</button>
+      <button class="cbtn c-re" id="housePosReset" data-btn="btn_reset">もとの ばしょ</button>
       <button class="imgbtn" id="housePlay" aria-label="あそぶ" style="width:230px"></button>
     </div>
   </section>
@@ -319,15 +327,15 @@ var ITEMS=[
  {id:"rainbow",img:"wall_rainbow",w:0.14,em:"🌈",nm:"にじ",pr:20,pl:"wall",x:70,y:34,s:.09}
 ];
 var FRIENDS=[
- {id:"cat",img:"friend_cat",w:0.11,em:"🐱",nm:"ねこ",at:12,pl:"floor",x:20,y:62,s:.09},
- {id:"dog",img:"friend_dog",w:0.12,em:"🐶",nm:"いぬ",at:30,pl:"floor",x:48,y:56,s:.09},
- {id:"panda",img:"friend_panda",w:0.12,em:"🐼",nm:"ぱんだ",at:55,pl:"floor",x:68,y:63,s:.09},
- {id:"fox",img:"friend_fox",w:0.12,em:"🦊",nm:"きつね",at:85,pl:"floor",x:82,y:57,s:.09},
- {id:"sheep",img:"friend_sheep",w:0.12,em:"🐑",nm:"ひつじ",at:120,pl:"floor",x:12,y:50,s:.09},
- {id:"penguin",img:"friend_penguin",w:0.1,em:"🐧",nm:"ぺんぎん",at:160,pl:"floor",x:46,y:47,s:.09}
+ {id:"cat",img:"friend_cat",w:0.11,em:"🐱",nm:"ねこ",pr:15,pl:"floor",x:20,y:62,s:.09},
+ {id:"dog",img:"friend_dog",w:0.12,em:"🐶",nm:"いぬ",pr:20,pl:"floor",x:48,y:56,s:.09},
+ {id:"panda",img:"friend_panda",w:0.12,em:"🐼",nm:"ぱんだ",pr:25,pl:"floor",x:68,y:63,s:.09},
+ {id:"fox",img:"friend_fox",w:0.12,em:"🦊",nm:"きつね",pr:30,pl:"floor",x:82,y:57,s:.09},
+ {id:"sheep",img:"friend_sheep",w:0.12,em:"🐑",nm:"ひつじ",pr:35,pl:"floor",x:12,y:50,s:.09},
+ {id:"penguin",img:"friend_penguin",w:0.1,em:"🐧",nm:"ぺんぎん",pr:40,pl:"floor",x:46,y:47,s:.09}
 ];
 var THEMES=[{nm:"ふつう",f:"none"},{nm:"いろ 1",f:"hue-rotate(40deg) saturate(1.1)"},{nm:"いろ 2",f:"hue-rotate(110deg) saturate(1.1)"},{nm:"いろ 3",f:"hue-rotate(180deg) saturate(1.1)"},{nm:"いろ 4",f:"hue-rotate(250deg) saturate(1.1)"},{nm:"いろ 5",f:"hue-rotate(320deg) saturate(1.1)"}];
-var THEME_PR=8;
+var THEME_PR=16;
 var MISSIONS=[
  {t:"きょう 3かい あそぶ",g:function(d){return Math.min(d.plays,3)},n:3},
  {t:"30びょう いないで クリア（ほし3つ）",g:function(d){return Math.min(d.s3,1)},n:1},
@@ -358,7 +366,7 @@ var BADGES=[
  {id:"h1",e:"🛋️",nm:"かぐ コレクター",d:"かぐを ぜんぶ あつめる",t:function(){return mem.owned.length>=ITEMS.length}}
 ];
 function checkBadges(){var n=[];BADGES.forEach(function(b){if(mem.badges.indexOf(b.id)<0&&b.t()){mem.badges.push(b.id);n.push(b);}});return n;}
-function checkFriends(){var n=[];FRIENDS.forEach(function(f){if(mem.friends.indexOf(f.id)<0&&mem.fs>=f.at){mem.friends.push(f.id);n.push(f);}});return n;}
+
 function titleNow(){var t="";BADGES.forEach(function(b){if(mem.badges.indexOf(b.id)>=0)t=b.e+" "+b.nm;});return t;}
 var ME={id:"me",img:"usagi_futsu",w:.13,em:"🐰",nm:"うさぎ",pl:"floor",x:38,y:61,s:.15};
 var $=function(id){return document.getElementById(id)};
@@ -509,12 +517,11 @@ function finish(){
   if(!mem.log)mem.log=[];mem.log.push({t:Date.now(),s:Math.round(sec*10)/10,k:stars});if(mem.log.length>500)mem.log=mem.log.slice(-500);
   var newBest=false;
   if(noMiss&&(mem.best==null||sec<mem.best)){mem.best=Math.round(sec*10)/10;newBest=true;}
-  var nf=checkFriends();var nb=checkBadges();
+  var nf=[];var nb=checkBadges();
   nb.forEach(function(b){xt.push("🏅 あたらしい バッジ："+b.e+" "+b.nm);});
   save();
   show("result");
   $("resExtra").innerHTML=xt.join("<br>");
-  if(nf.length){setTimeout(function(){if(!st)return;dialog('<div class="t pop">'+nf.map(function(f){return thumb(f,96)}).join(" ")+'<br>'+nf.map(function(f){return f.nm}).join("・")+' が あそびに きたよ！</div><div class="row"><button class="btn primary" data-goto="house">おうちを みる</button><button class="btn" data-no="1">とじる</button></div>');},1800);}
   $("resRabbit").innerHTML=pic(stars>=2?"usagi_yorokobu":"usagi_futsu",150);
   $("resTitle").textContent=noMiss?"ぜんぶ いっぱつで できた！":"さいごまで できたね！";
   $("resTime").textContent="タイム "+sec.toFixed(1)+" びょう";
@@ -630,14 +637,21 @@ function renderMission(){
     BADGES.forEach(function(b){var on=mem.badges.indexOf(b.id)>=0;h+='<div class="bd '+(on?'on':'off')+'"><div class="e">'+b.e+'</div><div class="n">'+(on?b.nm:'？？？')+'</div><div class="d">'+b.d+'</div></div>';});
     h+='</div>';
   }else{
-    var nx=FRIENDS.filter(function(f){return mem.friends.indexOf(f.id)<0})[0];
     h+='<div class="prompt">おともだち　'+mem.friends.length+' / '+FRIENDS.length+'</div>';
-    h+='<div class="note" style="text-align:center">'+(nx?'つぎの おともだちまで ほし あと '+(nx.at-mem.fs)+'こ（あそんで ふやそう）':'みんな あつまったよ！')+'</div><div class="bgrid">';
-    FRIENDS.forEach(function(f){var on=mem.friends.indexOf(f.id)>=0;h+='<div class="bd '+(on?'on':'off')+'"><div class="e">'+thumb(f,64)+'</div><div class="n">'+(on?f.nm:'？？？')+'</div><div class="d">'+(on?'おうちに いるよ':'ほし '+f.at+' こで くる')+'</div></div>';});
+    h+='<div class="note" style="text-align:center">ほしを つかって、すきな おともだちを おうちに よべるよ</div><div class="bgrid">';
+    FRIENDS.forEach(function(f){var on=mem.friends.indexOf(f.id)>=0;
+      h+='<div class="bd '+(on?'on':'')+'"><div class="e">'+thumb(f,84)+'</div><div class="n">'+f.nm+'</div>'+
+      (on?'<div class="d">おうちに いるよ</div>':'<button class="btn small" data-invite="'+f.id+'"'+(mem.stars<f.pr?' disabled':'')+'>'+starImg()+' '+f.pr+' よぶ</button>')+'</div>';});
     h+='</div>';
   }
   $("missBox").innerHTML=h;
 }
+function askInvite(id){var f=FRIENDS.filter(function(x){return x.id===id})[0];if(!f||mem.friends.indexOf(id)>=0)return;
+  dialog('<div class="t">'+thumb(f,96)+'<br>'+f.nm+' を よぶ？</div><div class="prompt">'+starImg()+' '+f.pr+' こ つかうよ</div><div class="row"><button class="btn primary" data-inv="'+id+'">よぶ</button><button class="btn" data-no="1">やめる</button></div>');}
+function doInvite(id){var f=FRIENDS.filter(function(x){return x.id===id})[0];
+  if(!f||mem.friends.indexOf(id)>=0||mem.stars<f.pr){closeDlg();return;}
+  mem.stars-=f.pr;mem.friends.push(id);checkBadges();save();sBuy();renderMission();
+  dialog('<div class="t pop">'+thumb(f,96)+'<br>'+f.nm+' が あそびに きたよ！</div><div class="row"><button class="btn primary" data-goto="house">おうちを みる</button><button class="btn" data-no="1">とじる</button></div>');}
 function showTheme(){
   function row(kind,label){var o='<div class="prompt">'+label+'</div><div class="sw">';
     THEMES.forEach(function(t,i){var have=mem.themes[kind].indexOf(i)>=0,sel=mem.theme[kind]===i;
@@ -725,6 +739,7 @@ $("friendBtn").onclick=function(){mTab="f";show("mission")};
 $("missBack").onclick=function(){show("home")};
 $("missTabs").addEventListener("click",function(e){var b=e.target.closest("[data-m]");if(!b)return;mTab=b.getAttribute("data-m");renderMission();});
 $("houseTheme").onclick=showTheme;
+$("missBox").addEventListener("click",function(e){var b=e.target.closest("[data-invite]");if(b&&!b.disabled)askInvite(b.getAttribute("data-invite"));});
 $("recBack").onclick=function(){show("home")};
 $("recTabs").addEventListener("click",function(e){var b=e.target.closest("[data-r]");if(!b)return;recRange=b.getAttribute("data-r");renderRecord();});
 $("gearBtn").onclick=showGear;
@@ -738,6 +753,7 @@ $("dlg").addEventListener("click",function(e){
   else if(t.hasAttribute("data-no"))closeDlg();
   else if(t.getAttribute("data-goto")==="house"){closeDlg();show("house");}
   else if(t.hasAttribute("data-reset"))doReset(t);
+  else if(t.hasAttribute("data-inv"))doInvite(t.getAttribute("data-inv"));
   else if(t.hasAttribute("data-theme"))pickTheme(t.getAttribute("data-theme"));
 });
 $("ov").addEventListener("click",function(e){if(e.target===$("ov"))closeDlg();});
@@ -747,6 +763,7 @@ window.addEventListener("resize",sizeRoom);
 (function(){var m={playBtn:"btn_play",shopBtn:"btn_shop",houseBtn:"btn_house",recBtn:"btn_record",howBtn:"btn_rule",resShopBtn:"btn_shop",resHouseBtn:"btn_house",houseShop:"btn_shop",housePlay:"btn_play"};
   for(var id in m){var el=$(id),d=IMG[m[id]];if(el&&d)el.innerHTML='<img src="'+d.d+'" alt="" draggable="false">';}
   var lg=$("titleLogo");if(lg&&IMG.title_logo)lg.src=IMG.title_logo.d;})();
+(function(){var e=document.querySelectorAll("[data-btn]");for(var i=0;i<e.length;i++){var d=IMG[e[i].getAttribute("data-btn")];if(d){e[i].innerHTML='<img src="'+d.d+'" alt="">';e[i].classList.add("has");}}})();
 refreshMute();renderHome();document.body.classList.add("bg-home");
 })();
 </script>
