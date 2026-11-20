@@ -325,7 +325,7 @@ var IMG6={"btn_badge":{"d":"data:image/webp;base64,UklGRjgzAABXRUJQVlA4WAoAAAAQA
 for(var k6 in IMG6)IMG[k6]=IMG6[k6];
 var CFG={
   count:10,                 // 1回の問題数
-  timeStars:[[30,3],[60,2]],  // [びょう以内, ほしの数]。どれも超えたら minStars
+  timeStars:[[20,4],[30,3],[60,2]],  // [びょう以内, ほしの数]。どれも超えたら minStars
   minStars:1,
   noMissBonus:0,            // ぜんぶ一回で正解したときのボーナス（今は0）
   key:"jugyo_10pair_v1"     // 端末への保存名
@@ -364,7 +364,7 @@ var THEMES=[{nm:"ふつう",f:"none"},{nm:"いろ 1",f:"hue-rotate(40deg) satura
 var THEME_PR=16;
 var MISSIONS=[
  {t:"きょう 3かい あそぶ",g:function(d){return Math.min(d.plays,3)},n:3},
- {t:"30びょう いないで クリア（ほし3つ）",g:function(d){return Math.min(d.s3,1)},n:1},
+ {t:"30びょう いないで クリア（ほし3つ いじょう）",g:function(d){return Math.min(d.s3,1)},n:1},
  {t:"ぜんぶ いっぱつで せいかい",g:function(d){return Math.min(d.nm,1)},n:1}
 ];
 function today(){var d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}
@@ -553,7 +553,7 @@ function finish(){
   $("resTime").textContent="タイム "+sec.toFixed(1)+" びょう";
   $("resNote").textContent=(newBest?"🎉 ベストタイム こうしん！　":"")+"ほしを "+stars+"こ ゲット！（ぜんぶで "+mem.stars+"こ）";
   var box=$("resStars");box.innerHTML="";
-  for(var i=0;i<3;i++){(function(i){var sp=document.createElement("span");sp.innerHTML=starImg(i<stars);
+  for(var i=0;i<4;i++){(function(i){var sp=document.createElement("span");sp.innerHTML=starImg(i<stars);
     box.appendChild(sp);
     setTimeout(function(){sp.classList.add("in");if(i<stars)sStar(i);},350+i*330);})(i);}
 }
@@ -713,6 +713,7 @@ function renderRecord(){
   g+='<text x="'+(L-8)+'" y="'+(T-14)+'" text-anchor="end" font-size="16" fill="#7a6f5f">びょう</text>';
   // ⭐3・⭐2 のライン
   function stars(n,xEnd,yB){var o="",sz=24,w=n*(sz+2);for(var q=0;q<n;q++){o+='<image href="'+IMG.icon_star.d+'" x="'+(xEnd-w+q*(sz+2))+'" y="'+(yB-sz+2)+'" width="'+sz+'" height="'+sz+'"/>';}return o;}
+  g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(20)+'" y2="'+Y(20)+'" stroke="#e0507a" stroke-width="4"/><text x="'+(W-R-4)+'" y="'+(Y(20)-8)+'" text-anchor="end" font-size="20" font-weight="700" fill="#c03560">20びょう</text>'+stars(4,W-R-4-114,Y(20)-8);
   g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(30)+'" y2="'+Y(30)+'" stroke="#e0a000" stroke-width="4"/><text x="'+(W-R-4)+'" y="'+(Y(30)-8)+'" text-anchor="end" font-size="20" font-weight="700" fill="#b07d00">30びょう</text>'+stars(3,W-R-4-114,Y(30)-8);
   g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(60)+'" y2="'+Y(60)+'" stroke="#6fa0d8" stroke-width="4"/><text x="'+(W-R-4)+'" y="'+(Y(60)-8)+'" text-anchor="end" font-size="20" font-weight="700" fill="#3a6fb0">60びょう</text>'+stars(2,W-R-4-114,Y(60)-8);
   g+='<line x1="'+L+'" x2="'+L+'" y1="'+T+'" y2="'+(T+ph)+'" stroke="#ccc" stroke-width="2"/><line x1="'+L+'" x2="'+(W-R)+'" y1="'+(T+ph)+'" y2="'+(T+ph)+'" stroke="#ccc" stroke-width="2"/>';
@@ -771,6 +772,12 @@ $("recTabs").addEventListener("click",function(e){var b=e.target.closest("[data-
 $("gearBtn").onclick=showGear;
 $("muteBtn").onclick=toggleMute;
 $("muteBtn2").onclick=toggleMute;
+document.addEventListener("keydown",function(e){
+  if(!st||!$("play").classList.contains("on")||$("ov").classList.contains("on")||e.ctrlKey||e.metaKey||e.altKey)return;
+  var n=parseInt(e.key,10);if(!(n>=1&&n<=9))return;
+  var b=$("pad").querySelector('button[data-n="'+n+'"]');if(!b||b.disabled)return;
+  e.preventDefault();onPad(n,b);
+});
 $("pad").addEventListener("click",function(e){var b=e.target.closest("button");if(!b||b.disabled)return;onPad(parseInt(b.getAttribute("data-n"),10),b);});
 $("shopGrid").addEventListener("click",function(e){var b=e.target.closest("[data-buy]");if(b&&!b.disabled)askBuy(b.getAttribute("data-buy"));});
 $("dlg").addEventListener("click",function(e){
