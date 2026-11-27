@@ -385,7 +385,7 @@ var BADGES=[
  {id:"t2",e:"⚡",nm:"かみなり うさぎ",d:"ぜんぶ いっぱつで 20びょう いない",t:function(){return mem.best!=null&&mem.best<=20}},
  {id:"t3",e:"🚀",nm:"ロケット うさぎ",d:"ぜんぶ いっぱつで 15びょう いない",t:function(){return mem.best!=null&&mem.best<=15}},
  {id:"d1",e:"📅",nm:"3にち れんぞく",d:"3にち つづけて あそぶ",t:function(){return streak()>=3||mem.badges.indexOf("d1")>=0}},
- {id:"d2",e:"🔥",nm:"7にち れんぞく",d:"7にち つづけて あそぶ",t:function(){return streak()>=7||mem.badges.indexOf("d2")>=0}},
+ {id:"d2",e:"🔥",nm:"5にち れんぞく",d:"5にち つづけて あそぶ",t:function(){return streak()>=5||mem.badges.indexOf("d2")>=0}},
  {id:"c1",e:"💮",nm:"スタンプ かんせい",d:"スタンプカードを いっぱいに する",t:function(){return mem.cards>=1}},
  {id:"f1",e:"🐾",nm:"おともだち 3にん",d:"おともだちが 3にん くる",t:function(){return mem.friends.length>=3}},
  {id:"f2",e:"🏠",nm:"にぎやかな おうち",d:"おともだちが ぜんいん くる",t:function(){return mem.friends.length>=FRIENDS.length}},
